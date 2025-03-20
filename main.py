@@ -102,18 +102,50 @@ def va_from_ticker():
     pyautogui.press('enter')
 
 
+def quartrfunc():
+    for i in range(6):
+        pyautogui.press('right')
 
+    sequence = [['up'], ['ctrl', 'c'], ['alt', 'tab'], ['/'], ['ctrl', 'v']]
+    for keys in sequence:
+        pyautogui.hotkey(*keys)
+        time.sleep(pause)
+
+
+    pyautogui.moveTo(1110, 290)
+    time.sleep(pause*8)
+    pyautogui.click()
+    time.sleep(pause)
+    sequence = [
+        ["ctrl", "l"],
+        ["ctrl", "c"],
+    ]
+    for keys in sequence:
+        pyautogui.hotkey(*keys)
+        time.sleep(pause)
+    tickerid = pyperclip.paste().split('/')[-1].split('?')[0]
+    print(tickerid)
+
+    # paste tickerid
+    pyautogui.hotkey("alt", 'tab')
+    time.sleep(pause*3)
+    for i in range(8):
+        pyautogui.press('left')
+    pyautogui.write(tickerid)
+    pyautogui.press('right')
 
 
 def on_press(key):
-    if key == keyboard.Key.caps_lock:
-        va_from_ticker()
-    elif key == keyboard.Key.caps_lock:
-        search_company()
+    if key == keyboard.Key.num_lock:
+        quartrfunc()
+    # elif key == keyboard.Key.caps_lock:
+    #     search_company()
     # elif key == keyboard.Key.f9:
     #     pasty()
     elif key == keyboard.Key.f3:
         exit()
+
+
 
 
 with keyboard.Listener(on_press=on_press) as listener:
