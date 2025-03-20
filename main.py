@@ -4,7 +4,7 @@ from pynput import keyboard
 import pyperclip
 
 counter = 0
-pause = 0.5
+pause = 0.2
 
 
 def vafunc():
@@ -13,7 +13,7 @@ def vafunc():
     print("Count ", counter)
     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
-    for i in range(7):
+    for i in range(2):
         pyautogui.press('right')
         # time.sleep(pause/3)
     cpy_cnt = 0
@@ -25,23 +25,23 @@ def vafunc():
         if pyperclip.paste() or cpy_cnt > 5:
             break
     sequence = [['alt', 'tab'],
-                ['ctrl', 'tab'],
+                # ['ctrl', 'tab'],
                 ['g'], ['ctrl', 'v']]
     s2 = [['enter'], ['ctrl', 'l'], ['ctrl', 'c']]
     for keys in sequence:
         pyautogui.hotkey(*keys)
         time.sleep(pause)
-    time.sleep(pause*5)
+    time.sleep(pause*7)
     for keys in s2:
         pyautogui.hotkey(*keys)
         time.sleep(pause)
 
 
-    pyautogui.moveTo(1500, 200)
+    pyautogui.moveTo(1700, 1050)
     pyautogui.click()
     va_ticker = pyperclip.paste().split('/')[-1]
     pyautogui.hotkey('alt', 'tab')
-    time.sleep(pause*3)
+    time.sleep(pause)
     pyautogui.press('left')
     pyautogui.press('left')
     pyautogui.press('left')
@@ -92,11 +92,23 @@ def search_company():
     pyautogui.write(tickerid)
     pyautogui.press('right')
 
+def va_from_ticker():
+    sequence = [['ctrl', 'tab'], ['up'], ['ctrl', 'c'], ['ctrl', 'tab'], ['alt', 'tab'], ['ctrl', 'l']]
+    for keys in sequence:
+        pyautogui.hotkey(*keys)
+        time.sleep(pause)
+    pyautogui.write('https://insights.visiblealpha.com/company/')
+    pyautogui.hotkey('ctrl', 'v')
+    pyautogui.press('enter')
+
+
+
+
 
 def on_press(key):
     if key == keyboard.Key.caps_lock:
-        vafunc()
-    elif key == keyboard.Key.num_lock:
+        va_from_ticker()
+    elif key == keyboard.Key.caps_lock:
         search_company()
     # elif key == keyboard.Key.f9:
     #     pasty()
