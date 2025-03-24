@@ -102,7 +102,7 @@ def va_from_ticker():
     pyautogui.press('enter')
 
 
-def quartrfunc():
+def quartrNameFunc():
     for i in range(6):
         pyautogui.press('right')
 
@@ -115,7 +115,7 @@ def quartrfunc():
     pyautogui.moveTo(1110, 290)
     time.sleep(pause*8)
     pyautogui.click()
-    time.sleep(pause)
+    time.sleep(pause*2)
     sequence = [
         ["ctrl", "l"],
         ["ctrl", "c"],
@@ -134,10 +134,22 @@ def quartrfunc():
     pyautogui.write(tickerid)
     pyautogui.press('right')
 
+def quartrIdFunc():
+    for i in range(2):
+        pyautogui.press('left')
+    pyautogui.hotkey('ctrl', 'c')
+    pyautogui.hotkey('alt', 'tab')
+    time.sleep(pause)
+    pyautogui.hotkey('ctrl', 'l')
+    pyautogui.write("https://web.quartr.com/companies/")
+    pyautogui.hotkey('ctrl', 'v')
+    pyautogui.press('enter')
+
+
 
 def on_press(key):
     if key == keyboard.Key.num_lock:
-        quartrfunc()
+        quartrIdFunc()
     # elif key == keyboard.Key.caps_lock:
     #     search_company()
     # elif key == keyboard.Key.f9:
