@@ -23,6 +23,7 @@ def pinegapDoc():
     url += pyperclip.paste() + "&view=Document"
     pyperclip.copy(url)
     pyautogui.hotkey('alt', 'tab')
+    time.sleep(pause)
     pyautogui.hotkey('ctrl', 'l')
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.press('enter')
