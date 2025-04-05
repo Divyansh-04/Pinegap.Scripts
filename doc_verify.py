@@ -22,26 +22,51 @@ def pinegapDoc():
     pyautogui.hotkey('ctrl', 'c')
     url += pyperclip.paste() + "&view=Document"
     pyperclip.copy(url)
-    for i in range(4):
-        pyautogui.press('right')
     pyautogui.hotkey('alt', 'tab')
+    pyautogui.hotkey('ctrl', 'l')
+    pyautogui.hotkey('ctrl', 'v')
+    pyautogui.press('enter')
+    pyautogui.hotkey('alt', 'tab')
+    for i in range(2):
+        pyautogui.press('right')
+    pyautogui.hotkey('ctrl', 'c')
+    for i in range(2):
+        pyautogui.press('right')
+
+
+def vaFast():
+    url = "https://insights.visiblealpha.com/company/"
+    pyautogui.press('down')
+    pyautogui.hotkey('ctrl', 'c')
+    url += pyperclip.paste()
+    pyautogui.hotkey('alt', 'tab')
+    pyperclip.copy(url)
+    pyautogui.hotkey('ctrl', 'l')
+    pyautogui.hotkey('ctrl', 'v')
+    pyautogui.press('enter')
+    pyautogui.hotkey('alt', 'tab')
+
+def qrtrFast():
+    url = "https://web.quartr.com/companies/"
+    pyautogui.press('down')
+    pyautogui.hotkey('ctrl', 'c')
+    url += pyperclip.paste()
+    pyautogui.hotkey('alt', 'tab')
+    pyperclip.copy(url)
     pyautogui.hotkey('ctrl', 'l')
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.press('enter')
     pyautogui.hotkey('alt', 'tab')
 
 
+
 def on_press(key):
     if key == keyboard.Key.num_lock:
         pinegapDoc()
-    # elif key == keyboard.Key.caps_lock:
-    #     search_company()
-    # elif key == keyboard.Key.f9:
-    #     pasty()
+        # vaFast()
+        # qrtrFast()
     elif key == keyboard.Key.f3:
         exit()
-
-
 
 
 with keyboard.Listener(on_press=on_press) as listener:

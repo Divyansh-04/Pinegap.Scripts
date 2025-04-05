@@ -1,10 +1,10 @@
 import pyautogui
 import time
-from pynput import keyboard
+from pynput import keyboard, mouse
 import pyperclip
 
 counter = 0
-pause = 0.2
+pause = 0.1
 
 
 def vafunc():
@@ -13,44 +13,42 @@ def vafunc():
     print("Count ", counter)
     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
-    for i in range(2):
-        pyautogui.press('right')
-        # time.sleep(pause/3)
-    cpy_cnt = 0
-    while True:
-        pyautogui.press('up')
-        time.sleep(pause)
-        pyautogui.hotkey('ctrl', 'c')
-        cpy_cnt += 1
-        if pyperclip.paste() or cpy_cnt > 5:
-            break
-    sequence = [['alt', 'tab'],
-                # ['ctrl', 'tab'],
-                ['g'], ['ctrl', 'v']]
-    s2 = [['enter'], ['ctrl', 'l'], ['ctrl', 'c']]
+    sequence = [
+        ['ctrl', 'tab'],
+        ['down'],
+        ['ctrl', 'c'],
+        ['alt', 'tab'],
+        ]
     for keys in sequence:
         pyautogui.hotkey(*keys)
-        time.sleep(pause)
-    time.sleep(pause*7)
+
+    time.sleep(pause)
+    pyperclip.copy('https://insights.visiblealpha.com/company/' + pyperclip.paste())
+
+
+    s2 = [['ctrl', 'l'], ['ctrl', 'v'], ['enter']]
     for keys in s2:
         pyautogui.hotkey(*keys)
-        time.sleep(pause)
 
-
-    pyautogui.moveTo(1700, 1050)
-    pyautogui.click()
-    va_ticker = pyperclip.paste().split('/')[-1]
     pyautogui.hotkey('alt', 'tab')
-    time.sleep(pause)
-    pyautogui.press('left')
-    pyautogui.press('left')
-    pyautogui.press('left')
-    pyautogui.write(va_ticker)
     pyautogui.press('right')
 
+def vafunc2():
+    pyautogui.hotkey('left')
+    pyautogui.hotkey('ctrl', 'c')
 
-def search_company():
-    # Copy company
+    pyautogui.hotkey('alt', 'tab')
+    ticker = pyperclip.paste()
+    pyperclip.copy('https://insights.visiblealpha.com/mex/' + ticker + '/SCH/KV')
+    seq = [['ctrl', 'l'], ['ctrl', 'v'], ['enter'], ['alt', 'tab'], ['ctrl', 'tab']]
+    for keys in seq:
+        pyautogui.hotkey(*keys)
+    time.sleep(pause)
+    pyautogui.write(ticker)
+
+
+
+def searchQrtrCompany():
     sequence = [['right'], ['right'], ["ctrl", "c"]]
     for keys in sequence:
         pyautogui.hotkey(*keys)
@@ -72,7 +70,6 @@ def search_company():
     time.sleep(pause)
 
 
-    # def pasty():
     # extract ticker id
     sequence = [
         ["ctrl", "l"],
@@ -92,7 +89,7 @@ def search_company():
     pyautogui.write(tickerid)
     pyautogui.press('right')
 
-def va_from_ticker():
+def vaTicker():
     sequence = [['ctrl', 'tab'], ['up'], ['ctrl', 'c'], ['ctrl', 'tab'], ['alt', 'tab'], ['ctrl', 'l']]
     for keys in sequence:
         pyautogui.hotkey(*keys)
@@ -147,19 +144,25 @@ def quartrIdFunc():
     pyautogui.press('enter')
 
 
-
 def on_press(key):
     if key == keyboard.Key.num_lock:
-        quartrIdFunc()
-    # elif key == keyboard.Key.caps_lock:
-    #     search_company()
-    # elif key == keyboard.Key.f9:
-    #     pasty()
+        vafunc()
+    elif key == keyboard.Key.f9:
+        vafunc2()
     elif key == keyboard.Key.f3:
         exit()
 
 
+def on_click(x, y, button, pressed):
+    if button == mouse.Button.x1:
+        vafunc()
+    elif button == mouse.Button.x2:
+        vafunc2()
+    elif button == mouse.Button.middle:
+        exit()
 
 
+# with mouse.Listener(on_click = on_click) as listener:
+#     listener.join()
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
