@@ -34,13 +34,15 @@ def vafunc():
     pyautogui.press('right')
 
 def vafunc2():
-    pyautogui.hotkey('left')
+    # pyautogui.hotkey('left')
+
+    pyautogui.hotkey('down')
     pyautogui.hotkey('ctrl', 'c')
 
     pyautogui.hotkey('alt', 'tab')
     ticker = pyperclip.paste()
     pyperclip.copy('https://insights.visiblealpha.com/mex/' + ticker + '/SCH/KV')
-    seq = [['ctrl', 'l'], ['ctrl', 'v'], ['enter'], ['alt', 'tab'], ['ctrl', 'tab']]
+    seq = [['ctrl', 'l'], ['ctrl', 'v'], ['enter'], ['alt', 'tab']]
     for keys in seq:
         pyautogui.hotkey(*keys)
     time.sleep(pause)
