@@ -35,6 +35,7 @@ def vafunc():
 
 def vafunc2():
     # pyautogui.hotkey('left')
+    print("vafunc2")
     pyautogui.hotkey('ctrl', 'tab')
     pyautogui.hotkey('down')
     pyautogui.hotkey('ctrl', 'c')
@@ -134,21 +135,21 @@ def quartrNameFunc():
     pyautogui.press('right')
 
 def quartrIdFunc():
-    for i in range(2):
+    for i in range(3):
         pyautogui.press('left')
     pyautogui.press('down')
     pyautogui.hotkey('ctrl', 'c')
     pyautogui.hotkey('alt', 'tab')
     time.sleep(pause)
     pyautogui.hotkey('ctrl', 'l')
-    pyautogui.write("https://web.quartr.com/companies/")
+    pyperclip.copy("https://web.quartr.com/companies/" + pyperclip.paste())
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.press('enter')
 
 
 def on_press(key):
     if key == keyboard.Key.num_lock:
-        vafunc2()
+        quartrIdFunc()
     elif key == keyboard.Key.f9:
         vafunc()
     elif key == keyboard.Key.f3:
