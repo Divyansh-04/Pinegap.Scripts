@@ -35,6 +35,7 @@ def vafunc():
 
 def vafunc2():
     # pyautogui.hotkey('left')
+    pyautogui.hotkey('ctrl', 'tab')
     pyautogui.hotkey('down')
     pyautogui.hotkey('ctrl', 'c')
 
@@ -147,9 +148,9 @@ def quartrIdFunc():
 
 def on_press(key):
     if key == keyboard.Key.num_lock:
-        vafunc()
-    elif key == keyboard.Key.f9:
         vafunc2()
+    elif key == keyboard.Key.f9:
+        vafunc()
     elif key == keyboard.Key.f3:
         exit()
 
