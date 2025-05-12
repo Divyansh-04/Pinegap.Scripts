@@ -50,8 +50,7 @@ def qrtrFast():
     pyautogui.press('down')
     pyautogui.hotkey('ctrl', 'c')
     url += pyperclip.paste() + '?companyId=' + pyperclip.paste() + '&documentType=overview&eventId='
-    for i in range(3):
-        pyautogui.press('right')
+    pyautogui.press('right')
     pyautogui.hotkey('ctrl', 'c')
     url += pyperclip.paste()
     pyautogui.hotkey('alt', 'tab')
