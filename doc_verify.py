@@ -1,4 +1,3 @@
-
 import pyautogui
 import time
 from pynput import keyboard
@@ -9,37 +8,28 @@ pause = 0.5
 ticker = ''
 
 def pinegapDoc():
-    global counter, ticker
+    global counter
     counter += 1
     print(counter)
-
     url = "https://web.pinegap.ai/"
-    for i in range(2):
+    for i in range(6):
         pyautogui.press('left')
     pyautogui.press('down')
     pyautogui.hotkey('ctrl', 'c')
-    ticker = pyperclip.paste()
-    url += ticker + "/documents?id="
+    url += pyperclip.paste() + "/documents?id="
 
-    pyautogui.press('left')
+    pyautogui.press('right')
     pyautogui.hotkey('ctrl', 'c')
     url += pyperclip.paste() + "&view=Document"
     pyperclip.copy(url)
-    ###
-    for i in range(3):
+    for i in range(5):
         pyautogui.press('right')
-    ###
     pyautogui.hotkey('alt', 'tab')
     time.sleep(pause)
     pyautogui.hotkey('ctrl', 'l')
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.press('enter')
-    # pyautogui.hotkey('alt', 'tab')
-    # for i in range(2):
-    #     pyautogui.press('right')
-    # pyautogui.hotkey('ctrl', 'c')
-    # for i in range(2):
-    #     pyautogui.press('right')
+    pyautogui.hotkey('alt', 'tab')
 
 
 def vaFast():
@@ -56,7 +46,12 @@ def vaFast():
 
 def qrtrFast():
     url = "https://web.quartr.com/companies/"
+    # https://web.quartr.com/companies/18158?companyId=18158&documentType=overview&eventId=339555
     pyautogui.press('down')
+    pyautogui.hotkey('ctrl', 'c')
+    url += pyperclip.paste() + '?companyId=' + pyperclip.paste() + '&documentType=overview&eventId='
+    for i in range(3):
+        pyautogui.press('right')
     pyautogui.hotkey('ctrl', 'c')
     url += pyperclip.paste()
     pyautogui.hotkey('alt', 'tab')
@@ -65,6 +60,9 @@ def qrtrFast():
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.press('enter')
     pyautogui.hotkey('alt', 'tab')
+    pyautogui.press('right')
+    pyautogui.press('right')
+
 
 def extractEventId():
     pyautogui.hotkey('ctrl', 'l')
@@ -80,27 +78,18 @@ def extractEventId():
     pyautogui.press('down')
 
 
-
-def qrtrSearch():
-    pyautogui.hotkey('ctrl', 'tab')
-    time.sleep(0.1)
-    pyperclip.copy(ticker)
-    pyautogui.press('/')
-    pyautogui.hotkey('ctrl', 'v')
-
-
 def on_press(key):
     if key == keyboard.Key.num_lock:
-        pinegapDoc()
-        # vaFast()
+        # pinegapDoc()
+        vaFast()
         # qrtrFast()
     elif key == keyboard.Key.f9:
         extractEventId()
-    elif key == keyboard.Key.shift_l:
-        qrtrSearch()
     elif key == keyboard.Key.f3:
         exit()
 
 
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
+
+

@@ -135,7 +135,7 @@ def quartrNameFunc():
     pyautogui.press('right')
 
 def quartrIdFunc():
-    for i in range(3):
+    for i in range(2):
         pyautogui.press('left')
     pyautogui.press('down')
     pyautogui.hotkey('ctrl', 'c')
