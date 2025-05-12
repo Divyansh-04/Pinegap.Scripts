@@ -81,8 +81,8 @@ def extractEventId():
 def on_press(key):
     if key == keyboard.Key.num_lock:
         # pinegapDoc()
-        vaFast()
-        # qrtrFast()
+        # vaFast()
+        qrtrFast()
     elif key == keyboard.Key.f9:
         extractEventId()
     elif key == keyboard.Key.f3:
