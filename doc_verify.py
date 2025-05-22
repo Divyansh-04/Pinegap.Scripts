@@ -45,12 +45,15 @@ def vaFast():
     pyautogui.hotkey('alt', 'tab')
 
 def qrtrFast():
+    for i in range(7):
+        pyautogui.press('left')
     url = "https://web.quartr.com/companies/"
     # https://web.quartr.com/companies/18158?companyId=18158&documentType=overview&eventId=339555
-    pyautogui.press('down')
+    pyautogui.press('up')
     pyautogui.hotkey('ctrl', 'c')
     url += pyperclip.paste() + '?companyId=' + pyperclip.paste() + '&documentType=overview&eventId='
-    pyautogui.press('right')
+    for i in range(3):
+        pyautogui.press('right')
     pyautogui.hotkey('ctrl', 'c')
     url += pyperclip.paste()
     pyautogui.hotkey('alt', 'tab')
@@ -76,12 +79,22 @@ def extractEventId():
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.press('down')
 
+def apollo():
+    pyautogui.hotkey('left')
+    pyautogui.hotkey('left')
+    pyautogui.hotkey('up')
+    pyautogui.hotkey('ctrl', 'c')
+    pyautogui.hotkey('alt', 'tab')
+    pyautogui.hotkey('ctrl', 'k')
+    pyautogui.hotkey('ctrl', 'v')
+    # pyautogui.hotkey('enter')
+
 
 def on_press(key):
     if key == keyboard.Key.num_lock:
         # pinegapDoc()
         # vaFast()
-        qrtrFast()
+        apollo()
     elif key == keyboard.Key.f9:
         extractEventId()
     elif key == keyboard.Key.f3:
