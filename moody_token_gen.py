@@ -25,4 +25,5 @@ r = requests.post(url, headers=headers)
 print(r.status_code)
 print(r.json()["access_token"])
 
-set_key(".env", "M_TOKEN", r.json()["access_token"])
+set_key("./", "M_TOKEN", r.json()["access_token"])
+# set_key("./", "Y_TOKEN","habla")
