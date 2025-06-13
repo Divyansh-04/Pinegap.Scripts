@@ -1,14 +1,34 @@
-import pandas as pd
+for _ in range(int(input())):
+    n, x = map(int, input().split())
+    a = list(map(int, input().split()))
+    b = list(map(int, input().split()))
 
-sheet_path = r"C:\Users\Divya\Downloads\China expansion - KeyValues(1-500).csv"
-dest_path =r'.\data\exp'
+    ans = 0
 
-df = pd.read_csv(sheet_path)
+    asuff = [a[n-1]]*n
+    for i in range(n-2, -1, -1):
+        asuff[i] = max(a[i], asuff[i+1])
 
-print(df['Metric Heading'].unique())
+    for i in range(n):
+        if (i == n-1 or asuff[i+1] <= x-ans-1) and b[i] <= x-ans:
+            ans += 1
 
-for i in range(len(df)):
-    if isinstance(df.at[i,'Metric Heading'], str):
-        pass
+    bans = '0'*n
 
-df.to_csv(dest_path, index=False)
+    l = ans
+
+    sops = [0]*(n+1)
+
+    for i in range(n-1, -1, -1):
+        curr = x-ans +1
+        curr += sops[i+1]
+        if b[i] <= x:
+            bans[i] = '1'
+            sops[i] = sops[i+1]+1
+        else:
+            sops[i] = sops[i+1]
+
+
+
+
+    print(bans)
