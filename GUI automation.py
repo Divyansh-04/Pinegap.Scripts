@@ -1,34 +1,37 @@
-for _ in range(int(input())):
-    n, x = map(int, input().split())
-    a = list(map(int, input().split()))
-    b = list(map(int, input().split()))
+import pyautogui
+import time
+from pynput import keyboard
 
-    ans = 0
+counter = 0
+pause = 0.3
 
-    asuff = [a[n-1]]*n
-    for i in range(n-2, -1, -1):
-        asuff[i] = max(a[i], asuff[i+1])
 
-    for i in range(n):
-        if (i == n-1 or asuff[i+1] <= x-ans-1) and b[i] <= x-ans:
-            ans += 1
-
-    bans = '0'*n
-
-    l = ans
-
-    sops = [0]*(n+1)
-
-    for i in range(n-1, -1, -1):
-        curr = x-ans +1
-        curr += sops[i+1]
-        if b[i] <= x:
-            bans[i] = '1'
-            sops[i] = sops[i+1]+1
-        else:
-            sops[i] = sops[i+1]
+def func():
+    pyautogui.press('left')
+    pyautogui.press('down')
+    pyautogui.hotkey('alt', 'tab')
+    time.sleep(pause)
+    pyautogui.hotkey('ctrl', 'w')
+    time.sleep(pause)
+    pyautogui.hotkey('alt', 'tab')
+    time.sleep(pause)
+    pyautogui.press('down')
+    pyautogui.press('enter')
+    time.sleep(pause)
+    pyautogui.click()
+    global counter
+    counter += 1
+    print(counter)
 
 
 
 
-    print(bans)
+def on_press(key):
+    if key == keyboard.Key.num_lock:
+        func()
+    elif key == keyboard.Key.f9:
+        exit()
+
+
+with keyboard.Listener(on_press=on_press) as listener:
+    listener.join()
